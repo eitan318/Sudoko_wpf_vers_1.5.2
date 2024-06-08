@@ -5,9 +5,65 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Sudoko_wpf"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800"
-        WindowState="Maximized">
+        Title="MainWindow"
+        Height="600"
+        Width="950"
+        AllowsTransparency="True"
+        WindowStartupLocation="CenterScreen"
+        WindowState="Maximized"
+        WindowStyle="None"
+        Background="Transparent"
+        MouseDown="Window_MouseDown">
     <Grid>
-        <Frame NavigationUIVisibility="Hidden" x:Name="MainFrame"/>
+        <!-- Background Border -->
+        <Border Background="{DynamicResource Background}" CornerRadius="20" />
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Border Background="{DynamicResource Menu_BG}" CornerRadius="20,0,0,20" />
+            
+            
+            <!-- Side Menu -->
+            <Grid Grid.Column="0">
+                <StackPanel HorizontalAlignment="Left" Margin="0,15,0,0">
+                    <!-- Example icon with trigger for hover effect -->
+                    <RadioButton Style="{StaticResource MenuButton}" Tag="/Assets/Icons/home.png" Content="Home" Click="IconButton_Click"/>
+                    <RadioButton Style="{StaticResource MenuButton}" Tag="/Assets/Icons/sudoku.png" Content="Game" Click="IconButton_Click"/>
+                    <RadioButton Style="{StaticResource MenuButton}" Tag="/Assets/Icons/setting.png" Content="Settings" Click="IconButton_Click" x:Name ="Settings_btn"/>
+                    <RadioButton Style="{StaticResource MenuButton}" Tag="/Assets/Icons/history.png" Content="History" Click="IconButton_Click"/>
+                    <RadioButton Style="{StaticResource MenuButton}" Tag="/Assets/Icons/instructions.png" Content="Instructions" Click="IconButton_Click"/>
+                </StackPanel>
+            </Grid>
+
+            <!-- Main Content -->
+            <Grid Grid.Column="1">
+                <Frame x:Name="MainFrame" NavigationUIVisibility="Hidden" />
+            </Grid>
+        </Grid>
+
+        <!-- Close Button -->
+        <Button x:Name="CloseApp"
+                Style="{StaticResource ExitApp}"
+                Height="40"
+                Width="40"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Top"
+                Margin="0,5,5,0"
+                Click="CloseApp_Click" />       
+
+        <!-- Resize Toggle Button -->
+        <ToggleButton x:Name="Resize"
+                Height="40"
+                Width="40"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Top"
+                Margin="0,5,50,0"
+                Style="{StaticResource ReSize}"
+                Checked="TglSizeBtn_Checked"
+                Unchecked="TglSizeBtn_Unchecked"/>
     </Grid>
 </Window>
